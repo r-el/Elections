@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace API.Entities
 {
     public class Manager
     {
         [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "שם מלא")]
         [Required(ErrorMessage = "הזן שם מלא")]
@@ -24,5 +25,7 @@ namespace API.Entities
         [Required(ErrorMessage = "הזן סיסמא")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        public List<Elections> Elections { get; set; }
     }
 }
