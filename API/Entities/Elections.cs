@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace API.Entities
@@ -24,5 +25,7 @@ namespace API.Entities
         [Display(Name = "?האם ניתן לשנות בחירה")]
         [Required]
         public bool IsPossibleToChangeAVote { get; set; } = false;
+
+        public List<Candidate> Candidates { get; set; }
     }
 }
