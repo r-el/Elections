@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace API.Entities
 {
@@ -16,5 +17,7 @@ namespace API.Entities
         [Display(Name = "תוכן התקלה")]
         [Required]
         public string Description { get; set; }
+
+        public List<ProblemNotes> ProblemNotes { get; set; }
     }
 }

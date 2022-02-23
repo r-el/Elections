@@ -21,6 +21,5 @@ namespace API.Entities
         public VotingArea VotingArea { get; set; }
 
         public List<Problem> Problems { get; set; }
-
     }
 }
