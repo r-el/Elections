@@ -27,5 +27,7 @@ namespace API.Entities
         public bool IsPossibleToChangeAVote { get; set; } = false;
 
         public List<Candidate> Candidates { get; set; }
+
+        public List<VoterPhoneInElections> VoterPhoneInElections { get; set; }
     }
 }

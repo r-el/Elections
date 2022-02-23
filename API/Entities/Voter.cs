@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace API.Entities
 {
@@ -28,5 +29,8 @@ namespace API.Entities
         [RegularExpression("(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,20})$", ErrorMessage = "סיסמא חייבת להיות עם מספרים ואותיות, בין 8 ל-10 ספרות ")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        // זכויות הצבעה של בוחר(טלפון) שכבר נרשם במערכת
+        public List<VoterPhoneInElections> VotersInElections { get; set; }
     }
 }

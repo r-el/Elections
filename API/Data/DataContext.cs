@@ -17,5 +17,6 @@ namespace API.Data
         public DbSet<Elections> Elections { get; set; }
         public DbSet<Candidate> Candidates { get; set; }
         public DbSet<Voter> Voter { get; set; }
+        public DbSet<VoterPhoneInElections> VotersInElections { get; set; }
     }
 }
