@@ -3,14 +3,16 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220223002802_ProblemEntity")]
+    partial class ProblemEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,30 +115,6 @@ namespace API.Data.Migrations
                     b.HasIndex("VoterPhoneInElectionsId");
 
                     b.ToTable("Problems");
-                });
-
-            modelBuilder.Entity("API.Entities.ProblemNotes", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("ProblemId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("SupervisorPhoneID")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProblemId");
-
-                    b.ToTable("ProblemNotes");
                 });
 
             modelBuilder.Entity("API.Entities.Supervisor", b =>
@@ -260,17 +238,6 @@ namespace API.Data.Migrations
                     b.Navigation("VoterPhoneInElections");
                 });
 
-            modelBuilder.Entity("API.Entities.ProblemNotes", b =>
-                {
-                    b.HasOne("API.Entities.Problem", "Problem")
-                        .WithMany("ProblemNotes")
-                        .HasForeignKey("ProblemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Problem");
-                });
-
             modelBuilder.Entity("API.Entities.Supervisor", b =>
                 {
                     b.HasOne("API.Entities.VoterPhoneInElections", "SupervisorID")
@@ -326,11 +293,6 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.Manager", b =>
                 {
                     b.Navigation("Elections");
-                });
-
-            modelBuilder.Entity("API.Entities.Problem", b =>
-                {
-                    b.Navigation("ProblemNotes");
                 });
 
             modelBuilder.Entity("API.Entities.Voter", b =>
