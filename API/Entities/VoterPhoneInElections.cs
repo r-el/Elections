@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace API.Entities
 { // טלפון של מצביע בבחירות 
@@ -18,5 +19,8 @@ namespace API.Entities
 
         // איזור בחירה
         public VotingArea VotingArea { get; set; }
+
+        public List<Problem> Problems { get; set; }
+
     }
 }
