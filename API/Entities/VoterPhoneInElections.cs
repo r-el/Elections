@@ -15,5 +15,8 @@ namespace API.Entities
 
         [Display(Name = "בחירת מועמד")]
         public Candidate Candidate { get; set; }
+
+        // איזור בחירה
+        public VotingArea VotingArea { get; set; }
     }
 }
