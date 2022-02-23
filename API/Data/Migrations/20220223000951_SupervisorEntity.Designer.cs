@@ -3,14 +3,16 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220223000951_SupervisorEntity")]
+    partial class SupervisorEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,53 +94,6 @@ namespace API.Data.Migrations
                     b.ToTable("Managers");
                 });
 
-            modelBuilder.Entity("API.Entities.Problem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("VoterPhoneInElectionsId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("VoterPhoneInElectionsId");
-
-                    b.ToTable("Problems");
-                });
-
-            modelBuilder.Entity("API.Entities.ProblemNotes", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("ProblemId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("SupervisorPhoneID")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProblemId");
-
-                    b.ToTable("ProblemNotes");
-                });
-
             modelBuilder.Entity("API.Entities.Supervisor", b =>
                 {
                     b.Property<int>("Id")
@@ -200,9 +155,6 @@ namespace API.Data.Migrations
                     b.Property<int>("VoterId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("VotingAreaId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CandidateId");
@@ -211,24 +163,7 @@ namespace API.Data.Migrations
 
                     b.HasIndex("VoterId");
 
-                    b.HasIndex("VotingAreaId");
-
                     b.ToTable("VotersInElections");
-                });
-
-            modelBuilder.Entity("API.Entities.VotingArea", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("VotingAreas");
                 });
 
             modelBuilder.Entity("API.Entities.Candidate", b =>
@@ -247,28 +182,6 @@ namespace API.Data.Migrations
                         .HasForeignKey("ManagerId");
 
                     b.Navigation("Manager");
-                });
-
-            modelBuilder.Entity("API.Entities.Problem", b =>
-                {
-                    b.HasOne("API.Entities.VoterPhoneInElections", "VoterPhoneInElections")
-                        .WithMany("Problems")
-                        .HasForeignKey("VoterPhoneInElectionsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("VoterPhoneInElections");
-                });
-
-            modelBuilder.Entity("API.Entities.ProblemNotes", b =>
-                {
-                    b.HasOne("API.Entities.Problem", "Problem")
-                        .WithMany("ProblemNotes")
-                        .HasForeignKey("ProblemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Problem");
                 });
 
             modelBuilder.Entity("API.Entities.Supervisor", b =>
@@ -298,17 +211,11 @@ namespace API.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API.Entities.VotingArea", "VotingArea")
-                        .WithMany("Voters")
-                        .HasForeignKey("VotingAreaId");
-
                     b.Navigation("Candidate");
 
                     b.Navigation("Elections");
 
                     b.Navigation("Voter");
-
-                    b.Navigation("VotingArea");
                 });
 
             modelBuilder.Entity("API.Entities.Candidate", b =>
@@ -328,24 +235,9 @@ namespace API.Data.Migrations
                     b.Navigation("Elections");
                 });
 
-            modelBuilder.Entity("API.Entities.Problem", b =>
-                {
-                    b.Navigation("ProblemNotes");
-                });
-
             modelBuilder.Entity("API.Entities.Voter", b =>
                 {
                     b.Navigation("VotersInElections");
-                });
-
-            modelBuilder.Entity("API.Entities.VoterPhoneInElections", b =>
-                {
-                    b.Navigation("Problems");
-                });
-
-            modelBuilder.Entity("API.Entities.VotingArea", b =>
-                {
-                    b.Navigation("Voters");
                 });
 #pragma warning restore 612, 618
         }
